@@ -1,1 +1,3 @@
+pafy==0.5.5
 streamlit==0.80.0
+librosa @ file:///home/conda/feedstock_root/build_artifacts/librosa_1595413403988/work
