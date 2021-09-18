@@ -1,6 +1,4 @@
 import streamlit as st
-import librosa
-import librosa.display
 
 st.set_page_config(page_title="Capstone Dev",
                    page_icon=":balloon:", layout="wide")
