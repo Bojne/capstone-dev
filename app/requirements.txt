@@ -4,4 +4,3 @@ streamlit==0.80.0
 youtube-dl==2021.4.17
 pafy==0.5.5
 pysndfile==1.4.3
-libsndfile1-dev
