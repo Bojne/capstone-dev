@@ -1,9 +1,0 @@
-SoundFile
-librosa
-streamlit
-youtube-dl
-pafy
-pysndfile
-libasound2-dev
-libsndfile1-dev
-ffmpeg
