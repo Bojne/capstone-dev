@@ -2,3 +2,4 @@ librosa
 streamlit
 youtube-dl
 pafy
+matplotlib
