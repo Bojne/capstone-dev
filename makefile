@@ -23,5 +23,5 @@
 all: develop
 
 develop:
-	cd ./app && pwd && streamlit run app.py
+	streamlit run app/app.py
 	

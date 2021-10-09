@@ -6,7 +6,7 @@ import librosa
 import streamlit as st
 
 st.set_page_config(page_title="Capstone Dev",
-                   page_icon="🧈", layout="wide",
+                   page_icon=":ballon:", layout="wide",
                    menu_items={
                        'About': 'https://yhhuang.notion.site/Capstone-Home-e9a1f458f2a143049100917f8f66272f'
                    })
@@ -30,7 +30,7 @@ def render_spectrogram(x, sr):
 
 
 def render_chromagram(x, sr):
-    st.write('`Chromagram`')
+    # st.write('`Chromagram`')
     fig = plt.figure(figsize=(14, 5))
     chromagram = librosa.feature.chroma_stft(x, sr=sr)
     librosa.display.specshow(chromagram, x_axis='time',
@@ -55,12 +55,15 @@ footer {visibility: hidden;}
 
 def analyzer_view():
     st.header('Capstone Working Demo')
+
     user_audio = st.sidebar.file_uploader("Upload Audio 1 (wav)")
     model_audio = st.sidebar.file_uploader("Upload Audio 2 (wav)")
 
     col1, col2 = st.columns(2)
     col1.subheader("Audio 1")
     col2.subheader("Audio 2")
+    st.sidebar.image(
+        'https://media.giphy.com/media/3o7ZeltXSmmz7Q5LCo/giphy.gif')
 
     if not user_audio:
         user_audio = 'app/src/audios/user.wav'
