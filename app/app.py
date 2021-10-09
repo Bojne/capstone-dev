@@ -63,9 +63,9 @@ def analyzer_view():
     col2.subheader("Audio 2")
 
     if not user_audio:
-        user_audio = 'src/audios/user.wav'
+        user_audio = 'app/src/audios/user.wav'
     if not model_audio:
-        model_audio = 'src/audios/model.wav'
+        model_audio = 'app/src/audios/model.wav'
 
     with col1:
         display_audio(user_audio)
