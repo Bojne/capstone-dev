@@ -24,7 +24,7 @@ def render_spectrogram(x, sr):
     stft_x = librosa.stft(x)
     fig = plt.figure(figsize=(14, 5))
     Xdb = librosa.amplitude_to_db(abs(stft_x))
-    librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='hz')
+    librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='log')
     plt.colorbar()
     st.pyplot(fig)
 
@@ -45,13 +45,6 @@ def display_audio(audio_data, col=None, sr=44000):
     render_waveplot(x, sr)
     render_chromagram(x, sr)
     render_spectrogram(x, sr)
-
-
-def spectrogram(audio):
-    # x: numpy array
-    X = librosa.stft(x[0])
-    # converting into energy levels(dB)
-    X
 
 
 st.markdown(""" <style>
