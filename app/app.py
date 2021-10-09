@@ -6,8 +6,10 @@ import librosa
 import streamlit as st
 
 st.set_page_config(page_title="Capstone Dev",
-                   page_icon=":balloon:", layout="wide")
-st.header('Capstone Working Demo')
+                   page_icon="🧈", layout="wide",
+                   menu_items={
+                       'About': 'https://yhhuang.notion.site/Capstone-Home-e9a1f458f2a143049100917f8f66272f'
+                   })
 
 
 def display_audio(audio_data, col=None, sr=44000):
@@ -16,9 +18,27 @@ def display_audio(audio_data, col=None, sr=44000):
     plt.title('Spectrogram')
     librosa.display.waveplot(x[0], sr=sr)
     if col is not None:
-        return col.pyplot(fig)
+        col.pyplot(fig)
     else:
-        return st.pyplot(fig)
+        st.pyplot(fig)
+
+
+def spectrogram():
+    # x: numpy array
+    X = librosa.stft(x[0])
+    # converting into energy levels(dB)
+    Xdb = librosa.amplitude_to_db(abs(X))
+    fig2 = plt.figure(figsize=(20, 5))
+    librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='hz')
+    plt.colorbar()
+    st.subheader("Spectrogram with normal axis")
+    st.pyplot(fig2)
+
+
+st.markdown(""" <style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+</style> """, unsafe_allow_html=True)
 
 
 def plot_spectrogram(sr=44000
@@ -26,20 +46,48 @@ def plot_spectrogram(sr=44000
     return None
 
 
-def main():
-    st.sidebar.subheader("Home")
-    website_menu = st.sidebar.selectbox(
-        "Porject", ("Audio Analyzer", "About"))
-    user_audio = st.sidebar.file_uploader("Upload a .wav file of your speech")
-    model_audio = st.sidebar.file_uploader(
-        "Upload a .wav file of model speech")
+def analyzer_view():
+    st.header('Capstone Working Demo')
+    user_audio = st.sidebar.file_uploader("Upload Audio 1 (wav)")
+    model_audio = st.sidebar.file_uploader("Upload Audio 2 (wav)")
+
     col1, col2 = st.columns(2)
     col1.subheader("Audio 1")
     col2.subheader("Audio 2")
-    if user_audio:
-        display_audio(user_audio, col1)
-    if model_audio:
-        display_audio(model_audio, col2)
+
+    if not user_audio:
+        user_audio = 'src/audios/user.wav'
+    if not model_audio:
+        model_audio = 'src/audios/model.wav'
+
+    display_audio(user_audio, col1)
+    display_audio(model_audio, col2)
+
+
+def about_view():
+    st.markdown(
+        """
+        ## Welcome to the capstone!
+
+        ### Visit [Notion Home Page](https://yhhuang.notion.site/Capstone-Home-e9a1f458f2a143049100917f8f66272f)
+        
+        ### Sign up for project update / product waitlist 👇
+        """
+    )
+    st.components.v1.iframe(
+        src='https://6icg6d7rllb.typeform.com/to/yz5I5P1l',
+        height=600)
+
+
+def main():
+    st.sidebar.subheader("Home")
+    website_menu = st.sidebar.selectbox(
+        "Select Menu", ("Audio Analyzer", "About"))
+    if website_menu == "Audio Analyzer":
+        analyzer_view()
+
+    if website_menu == "About":
+        about_view()
 
 
 if __name__ == '__main__':
@@ -50,41 +98,11 @@ if __name__ == '__main__':
 audio_data = '../audios/model.wav'
 
 
-# list all audio format
-#audiostreams = video.audiostreams
-# audiostreams = [(a.bitrate, a.extension, a.get_filesize())
-#                for a in audiostreams]
-# st.write(audiostreams)
-# st.subheader("Option 2. Directly upload audio sample")
-# if uploaded_file is not None:
-#     audio_data = uploaded_file
-# # This returns an audio time series as a numpy array with a default sampling rate(sr) of 22KHZ
-# st.audio(audio_data, format='audio/wav')
-
-# st.subheader("Upload your own recording of the sample")
-# # The User Uploaded files
-# audio_user = "../audios/user.wav"
-# if uploaded_file2 is not None:
-# audio_user = uploaded_file2
-# This returns an audio time series as a numpy array with a default sampling rate(sr) of 22KHZ
-# st.audio(audio_user, format='audio/wav')
-
-
 # st.header("Sample Audio Result")
 # # Get the audio display
 
 # # plotting the sampled signal
 
-# # x: numpy array
-# X = librosa.stft(x[0])
-# # converting into energy levels(dB)
-# Xdb = librosa.amplitude_to_db(abs(X))
-
-# fig2 = plt.figure(figsize=(20, 5))
-# librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='hz')
-# plt.colorbar()
-# st.subheader("Spectrogram with normal axis")
-# st.pyplot(fig2)
 
 # fig3 = plt.figure(figsize=(20, 5))
 # librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='log')
