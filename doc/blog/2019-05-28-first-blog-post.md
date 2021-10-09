@@ -1,12 +1,22 @@
 ---
-slug: first-blog-post
-title: First Blog Post
+slug: code
+title: Code Snippets 
 authors:
-  name: Gao Wei
-  title: Docusaurus Core Team
-  url: https://github.com/wgao19
-  image_url: https://github.com/wgao19.png
-tags: [hola, docusaurus]
+  name: Yueh Han Huang 
+  title: Minerva Student 
+  url: https://github.com/bojne
+  image_url: https://github.com/bojne.png
+tags: [code, dev]
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet
+This file will be my collection of snippets.
+
+Download Youtube Audio
+```python
+import ffmpeg
+stream = ffmpeg.input('Rhye - Full Performance (Live on KEXP).webm')
+stream = ffmpeg.output(stream, 'Rhye.wav')
+ffmpeg.run(stream)
+https://pythonhosted.org/pafy/#pafy-methods
+https://github.com/mps-youtube/pafy
+```
