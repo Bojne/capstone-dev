@@ -62,8 +62,6 @@ def analyzer_view():
     col1, col2 = st.columns(2)
     col1.subheader("Audio 1")
     col2.subheader("Audio 2")
-    st.sidebar.image(
-        'https://media.giphy.com/media/3o7ZeltXSmmz7Q5LCo/giphy.gif')
 
     if not user_audio:
         user_audio = 'app/src/audios/user.wav'
@@ -78,12 +76,14 @@ def analyzer_view():
 
 
 def about_view():
+    st.sidebar.image(
+        'https://media.giphy.com/media/3o7ZeltXSmmz7Q5LCo/giphy.gif')
     st.markdown(
         """
-        # Welcome to the capstone!
+        ## Welcome to the Yueh Han's Capstone Demo Page!
 
 
-        # Sign up for project update / product waitlist 👇
+        ### Sign up for project update / product waitlist 👇
         """
     )
     st.components.v1.iframe(
@@ -91,10 +91,11 @@ def about_view():
         height=600)
 
     st.markdown("""
-    # Visit [Notion Home Page](https://yhhuang.notion.site/Capstone-Home-e9a1f458f2a143049100917f8f66272f)
+    ### Visit [Notion Home Page](https://yhhuang.notion.site/Capstone-Home-e9a1f458f2a143049100917f8f66272f)
 
-    Yueh Han Huang
-    yhhuang@uni.minerva.edu
+    By Yueh Han Huang
+    
+    [yhhuang@uni.minerva.edu](yhhuang@uni.minerva.edu)
     """)
 
 
