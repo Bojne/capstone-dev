@@ -30,7 +30,7 @@ def render_spectrogram(x, sr):
 
 
 def render_chromagram(x, sr):
-    # st.write('`Chromagram`')
+    st.write('`Chromagram`')
     fig = plt.figure(figsize=(14, 5))
     chromagram = librosa.feature.chroma_stft(x, sr=sr)
     librosa.display.specshow(chromagram, x_axis='time',
