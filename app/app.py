@@ -99,6 +99,15 @@ def about_view():
     """)
 
 
+def fun_fact_view():
+    st.markdown("""
+        ### Interesting Video About Pronouciation
+    """)
+    st.components.v1.iframe(
+        src='https://www.youtube.com/watch?v=2yzMUs3badc',
+        height=600)
+
+
 def main():
     st.sidebar.subheader("Home")
     website_menu = st.sidebar.selectbox(
@@ -108,6 +117,9 @@ def main():
 
     if website_menu == "About":
         about_view()
+
+    if website_menu == "Fun Fact":
+        fun_fact_view()
 
 
 if __name__ == '__main__':
