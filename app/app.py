@@ -99,27 +99,23 @@ def about_view():
     """)
 
 
-def fun_fact_view():
-    st.markdown("""
-        ### Interesting Video About Pronouciation
-    """)
-    st.components.v1.iframe(
-        src='https://www.youtube.com/watch?v=2yzMUs3badc',
-        height=600)
+def resources_view():
+    st.subheader("Interesting Video About Pronunciation")
+    st.video('https://www.youtube.com/embed/2yzMUs3badc')
 
 
 def main():
     st.sidebar.subheader("Home")
     website_menu = st.sidebar.selectbox(
-        "Select Menu", ("Audio Analyzer", "About"))
+        "Select Menu", ("Audio Analyzer", "About", "Resources"))
     if website_menu == "Audio Analyzer":
         analyzer_view()
 
     if website_menu == "About":
         about_view()
 
-    if website_menu == "Fun Fact":
-        fun_fact_view()
+    if website_menu == "Resources":
+        resources_view()
 
 
 if __name__ == '__main__':
