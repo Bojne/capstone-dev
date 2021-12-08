@@ -4,6 +4,10 @@ import librosa.display
 import matplotlib.pyplot as plt
 import librosa
 import streamlit as st
+from bokeh.models.widgets import Button
+from bokeh.models import CustomJS
+from streamlit_bokeh_events import streamlit_bokeh_events
+import parselmouth
 
 st.set_page_config(page_title="Capstone Dev",
                    page_icon=":ballon:", layout="wide",
@@ -38,9 +42,19 @@ def render_chromagram(x, sr):
     plt.colorbar()
     st.pyplot(fig)
 
+def render_pitch_diagram(audio_data): 
+    st.write('`Pitch Plot`')
+    sound = parselmouth.Sound(audio_data)
+    pitch_track = sound.to_pitch().selected_array['frequency']
+    fig = plt.figure(figsize=(14, 5))
+    plt.plot([float('nan') if x == 0.0 else x for x in pitch_track], '.')
+    plt.show()
+    st.pyplot(fig)
+
 
 def display_audio(audio_data, col=None, sr=44000):
     st.audio(audio_data)
+    render_pitch_diagram(audio_data)
     x = librosa.load(audio_data, sr=None)[0]
     render_waveplot(x, sr)
     render_chromagram(x, sr)
@@ -103,11 +117,46 @@ def resources_view():
     st.subheader("Interesting Video About Pronunciation")
     st.video('https://www.youtube.com/embed/2yzMUs3badc')
 
+def audio_exp_view():
+    
+    st.subheader("Voice Recognition, power by Chrome")
+    st.code('Speak something and wait a few seconds')
+    stt_button = Button(label="Click to start recording 🎤", width=100)
+
+    stt_button.js_on_event("button_click", CustomJS(code="""
+        var recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+    
+        recognition.onresult = function (e) {
+            var value = "";
+            for (var i = e.resultIndex; i < e.results.length; ++i) {
+                if (e.results[i].isFinal) {
+                    value += e.results[i][0].transcript;
+                }
+            }
+            if ( value != "") {
+                document.dispatchEvent(new CustomEvent("GET_TEXT", {detail: value}));
+            }
+        }
+        recognition.start();
+        """))
+
+    result = streamlit_bokeh_events(
+        stt_button,
+        events="GET_TEXT",
+        key="listen",
+        refresh_on_update=False,
+        override_height=75,
+        debounce_time=0)
+    if result:
+        if "GET_TEXT" in result:
+            st.write(result.get("GET_TEXT"))
 
 def main():
     st.sidebar.subheader("Home")
     website_menu = st.sidebar.selectbox(
-        "Select Menu", ("Audio Analyzer", "About", "Resources"))
+        "Select Menu", ("Audio Analyzer", "About", "Resources", "Audio Recognition"))
     if website_menu == "Audio Analyzer":
         analyzer_view()
 
@@ -116,6 +165,10 @@ def main():
 
     if website_menu == "Resources":
         resources_view()
+
+    if website_menu == 'Audio Recognition':
+        audio_exp_view()
+
 
 
 if __name__ == '__main__':
