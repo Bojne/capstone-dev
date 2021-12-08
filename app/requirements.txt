@@ -3,3 +3,6 @@ streamlit
 youtube-dl
 pafy
 matplotlib
+bokeh
+streamlit_bokeh_events
+parselmouth
