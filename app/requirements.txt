@@ -26,7 +26,6 @@ entrypoints==0.3
 fonttools==4.28.3
 gitdb==4.0.9
 GitPython==3.1.24
-googleads==3.8.0
 httplib2==0.20.2
 idna==3.3
 importlib-metadata==4.8.2
