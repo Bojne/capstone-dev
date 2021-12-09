@@ -1,5 +1,4 @@
 from datetime import time
-import pafy
 import librosa.display
 import matplotlib.pyplot as plt
 import librosa
