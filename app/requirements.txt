@@ -57,7 +57,7 @@ notebook==6.4.6
 numpy==1.21.4
 oauth2client==4.1.3
 packaging==21.3
-googleads==30.0.0
+googleads==23.0.0
 pandocfilters==1.5.0
 parselmouth==1.1.1
 parso==0.8.3
