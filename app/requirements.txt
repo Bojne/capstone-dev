@@ -82,7 +82,7 @@ PySocks==1.7.1
 python-dateutil==2.8.2
 pytz==2015.7
 pytz-deprecation-shim==0.1.0.post0
-PyYAML==6.0
+PyYAML
 pyzmq==22.3.0
 requests==2.26.0
 resampy==0.2.2
