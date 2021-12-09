@@ -98,7 +98,6 @@ SoundFile==0.10.3.post1
 stopit==1.1.1
 streamlit==1.2.0
 streamlit-bokeh-events==0.1.2
-suds-jurko==0.6
 terminado==0.12.1
 testpath==0.5.0
 threadpoolctl==3.0.0
