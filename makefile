@@ -20,8 +20,10 @@
 #                                               #
 #+++++++++++++++++++++++++++++++++++++++++++++++#
 
-all: develop
+all:
+	streamlit run app/app.py
 
-develop:
+
+dev:
 	streamlit run app/app.py
 	

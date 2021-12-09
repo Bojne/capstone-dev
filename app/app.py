@@ -41,20 +41,19 @@ def render_chromagram(x, sr):
     plt.colorbar()
     st.pyplot(fig)
 
-def render_pitch_diagram(audio_data): 
+def render_pitch_diagram(x): 
     st.write('`Pitch Plot`')
-    sound = parselmouth.Sound(audio_data)
+    sound = parselmouth.Sound(x)
     pitch_track = sound.to_pitch().selected_array['frequency']
     fig = plt.figure(figsize=(14, 5))
     plt.plot([float('nan') if x == 0.0 else x for x in pitch_track], '.')
-    plt.show()
     st.pyplot(fig)
 
 
-def display_audio(audio_data, col=None, sr=44000):
+def display_audio(audio_data, col=None, sr=24000):
     st.audio(audio_data)
-    render_pitch_diagram(audio_data)
-    x = librosa.load(audio_data, sr=None)[0]
+    x = librosa.load(audio_data, sr=sr)[0]
+    render_pitch_diagram(x)
     render_waveplot(x, sr)
     render_chromagram(x, sr)
     render_spectrogram(x, sr)
@@ -74,12 +73,14 @@ def analyzer_view():
 
     col1, col2 = st.columns(2)
     col1.subheader("Audio 1")
+    col1.write('Are you `flying` to Germany?')
     col2.subheader("Audio 2")
+    col2.write('Are you flying to `Germany`?')
 
     if not user_audio:
-        user_audio = 'app/src/audios/user.wav'
+        user_audio = 'app/src/record/focus-flying.wav'
     if not model_audio:
-        model_audio = 'app/src/audios/model.wav'
+        model_audio = 'app/src/record/focus-germany.wav'
 
     with col1:
         display_audio(user_audio)
@@ -151,6 +152,7 @@ def audio_exp_view():
     if result:
         if "GET_TEXT" in result:
             st.write(result.get("GET_TEXT"))
+    
 
 def main():
     st.sidebar.subheader("Home")
