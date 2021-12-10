@@ -55,7 +55,7 @@ def display_audio(audio_data, col=None, sr=24000):
     x = librosa.load(audio_data, sr=sr)[0]
     render_pitch_diagram(x)
     render_waveplot(x, sr)
-    render_chromagram(x, sr)
+    #render_chromagram(x, sr)
     render_spectrogram(x, sr)
 
 
