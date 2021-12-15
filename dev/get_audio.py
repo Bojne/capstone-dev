@@ -6,6 +6,8 @@ from streamlit_bokeh_events import streamlit_bokeh_events
 stt_button = Button(label="Speak", width=100)
 
 stt_button.js_on_event("button_click", CustomJS(code="""
+
+    
     var recognition = new webkitSpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
